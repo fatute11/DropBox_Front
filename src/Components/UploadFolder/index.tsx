@@ -9,11 +9,21 @@ export default class UploadFolder extends React.PureComponent{
     //public static Display = withStyles(styles as any)(UploadFolder) as React.ComponentType<P>
 
     handleDrop = async (acceptedFiles) => {
-        // console.log(acceptedFiles)
-        await API.post(`/upload-folder`, acceptedFiles).then(res => {
+        console.log(acceptedFiles)
+
+        let formData = new FormData();
+
+        for(let i = 0; i<acceptedFiles.length; i++) {
+            formData.append('file', acceptedFiles[i])
+        }
+    
+        await API.post(`/upload-folder`, formData, {headers: {
+            'content-type': 'multipart/form-data'
+        }}).then(res => {
             console.log(res);
         })
     }
+
     render(){
         return(
             <div>

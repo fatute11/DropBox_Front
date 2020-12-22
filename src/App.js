@@ -5,13 +5,13 @@ import "./App.css";
 
 import AuthService from "./services/auth.service";
 
-import Login from "./components/login.component";
-import Register from "./components/register.component";
-import Home from "./components/home.component";
-import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
-import BoardModerator from "./components/board-moderator.component";
-import BoardAdmin from "./components/board-admin.component";
+import Login from "./Components/login.component";
+import Register from "./Components/register.component";
+import Home from "./Components/home.component";
+import Profile from "./Components/profile.component";
+import BoardUser from "./Components/board-user.component";
+import BoardModerator from "./Components/board-moderator.component";
+import BoardAdmin from "./Components/board-admin.Component";
 
 class App extends Component {
   constructor(props) {

@@ -83,7 +83,7 @@ export default class FileList extends React.PureComponent<P & WithStyles<Styles>
         });  
     }
 
-    renderSwitch(file) {
+    renderSwitch(file:any) {
         switch(file.extension) {
             case 'docx':
                 return <FileIcon extension={file.extension} {...defaultStyles.docx} />;

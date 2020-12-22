@@ -34,19 +34,19 @@ export default class ResetPassword extends React.PureComponent<{}, S>{
 
         const response = this.passwordValidation(this.state.password, this.state.passwordAgain)   
         console.log(response)
-        if (response.error) {
-
-        } 
+        // if (response.error) {
+            
+        // } 
         API.post('/reset-password', {password: response, id: this.state.userId}).then(res => {console.log(res);})
     }
 
-    handlePasswordChange = (e) => {
+    handlePasswordChange = (e:any) => {
         console.log(e.target)
         this.setState({ [e.target.name]: e.target.value } as S)
     }
 
-    passwordValidation = (password, passwordAgain) => {
-        if(password != passwordAgain) {
+    passwordValidation = (password:string , passwordAgain:string) => {
+        if(password !== passwordAgain) {
             return {
                 error:'not same password', 
                 message: 'Les mots de passe ne sont pas identiques !'

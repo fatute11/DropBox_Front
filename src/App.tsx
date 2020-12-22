@@ -14,7 +14,7 @@ import Home from "./Components/home.component";
 import Profile from "./Components/profile.component";
 import BoardUser from "./Components/board-user.component";
 // import BoardModerator from "./Components/board-moderator.component";
-// import BoardAdmin from "./Components/board-admin.component";
+// import BoardAdmin from "./Components/board-admin.omponent";
 
 function App() {
     return (

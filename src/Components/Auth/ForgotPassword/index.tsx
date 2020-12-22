@@ -18,7 +18,7 @@ export default class ForgotPassword extends React.PureComponent<{}, S>{
         }
     }
 
-    handleEmailChange= (e) => {
+    handleEmailChange= (e:any) => {
         const userEmail = e.target.value;
         this.setState({ email: userEmail})
     }

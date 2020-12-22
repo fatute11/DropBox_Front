@@ -13,22 +13,17 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^16.9.8",
     "axios": "^0.21.0",
+    "bootstrap": "^4.5.3",
     "isexe": "^2.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.2.4",
-<<<<<<< HEAD
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
-    "typescript": "^4.0.3",
-=======
     "react-file-icon": "^1.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-validation": "^3.0.7",
     "typescript": "^4.0.3",
     "validator": "^12.2.0",
->>>>>>> 46de2ae779957eaddbaf6d47eb9fa7a5fc9736e6
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -58,6 +53,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
+    "@types/react-file-icon": "^1.0.0",
+    "@types/react-router-dom": "^5.1.6",
     "babel-loader": "8.1.0",
     "webpack": "4.44.2"
   },

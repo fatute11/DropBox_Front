@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Cookies from "js-cookie"
 const API_URL = "http://localhost:8020/api/auth/";
 
 class AuthService {
@@ -12,6 +12,7 @@ class AuthService {
       .then(response => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
+          Cookies.set('access_token', response.data.accessToken)
         }
 
         return response.data;

@@ -52,7 +52,7 @@ export default class FileList extends React.PureComponent<P & WithStyles<Styles>
     componentDidMount = async () => {
 
         const data = await API
-        .get('/file-list')
+        .get('/file-list',{withCredentials: true})
         .then(response => {return response.data})
 
         data.forEach(element => {

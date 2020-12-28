@@ -1,6 +1,7 @@
 import React from 'react'
 import Dropzone from 'react-dropzone'
 import API from '../../Api/Api'
+import AuthService from '../../services/auth.service'
 
 // interface P {}
 // interface S {}
@@ -9,10 +10,11 @@ export default class UploadFolder extends React.PureComponent{
     //public static Display = withStyles(styles as any)(UploadFolder) as React.ComponentType<P>
 
     handleDrop = async (acceptedFiles) => {
-        console.log(acceptedFiles)
 
+        let user = AuthService.getCurrentUser()
         let formData = new FormData();
 
+        formData.append('user', user.id)
         for(let i = 0; i<acceptedFiles.length; i++) {
             formData.append('file', acceptedFiles[i])
         }

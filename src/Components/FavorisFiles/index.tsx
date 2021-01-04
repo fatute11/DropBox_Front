@@ -1,4 +1,9 @@
 import React from 'react';
+import FolderOpenTwoToneIcon from '@material-ui/icons/FolderOpenTwoTone';
+import { FileIcon, defaultStyles } from 'react-file-icon';
+import { Files } from "../../Interfaces/files"
+import styles, { Styles } from './styles';
+import API from '../../Api/Api'
 import { 
     withStyles,
     WithStyles,
@@ -13,47 +18,49 @@ import {
     TableRow, 
     Paper,  
 } from '@material-ui/core';
-import API from '../../Api/Api'
-import styles, { Styles } from './styles';
-import { Files } from "../../Interfaces/files"
-import { FileIcon, defaultStyles } from 'react-file-icon';
-import StarRoundedIcon from '@material-ui/icons/StarRounded';
+
 import StarBorderRoundedIcon from '@material-ui/icons/StarBorderRounded';
-import FolderOpenTwoToneIcon from '@material-ui/icons/FolderOpenTwoTone';
+import StarRoundedIcon from '@material-ui/icons/StarRounded';
 
 const StyledTableCell = withStyles((theme: Theme) =>
-    createStyles({
-        head: {
-            backgroundColor: theme.palette.common.black,
-            color: theme.palette.common.white,
-        },
-        body: {
-            fontSize: 14,
-        },
-    }),
+  createStyles({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }),
 )(TableCell);
 
 const StyledTableRow = withStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            '&:nth-of-type(odd)': {
-                backgroundColor: theme.palette.action.hover,
-            },
-        },
-    }),
+  createStyles({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }),
 )(TableRow);
 
 interface P { }
 interface S { files:Array<Files> }
 
-export default class FileList extends React.PureComponent<P & WithStyles<Styles>, S>{
+export default class FavorisFiles extends React.PureComponent<P & WithStyles<Styles>, S>{
 
     public state: Readonly<S> = { files: [] };
-    public static Display = withStyles(styles as any)(FileList) as React.ComponentType<P>
+    public static Display = withStyles(styles as any)(FavorisFiles) as React.ComponentType<P>
 
     componentDidMount = async () => {
 
-        const data = await API.get('/file-list',{withCredentials: true}).then(response => {return response.data})
+        const data = await API
+        .get('/favorites-files',
+        {withCredentials: true}
+        )
+        .then(response => {
+            return response.data
+        })
 
         data.forEach(element => {
             console.log(element)
@@ -82,16 +89,7 @@ export default class FileList extends React.PureComponent<P & WithStyles<Styles>
                 }
                 size = Math.round(parseInt(element.size) / 1000)
                 this.setState({
-                    files: [
-                        ...this.state.files,  
-                        {
-                            _id: element._id,
-                            title: element.title, 
-                            extension: fileExtension, 
-                            size: size.toString(), 
-                            isFavoris: element.isFavoris
-                        }
-                    ]
+                    files: [...this.state.files,  {_id: element._id, title: element.title, extension: fileExtension, size: size.toString()}]
                 })
             }
         });  
@@ -112,14 +110,6 @@ export default class FileList extends React.PureComponent<P & WithStyles<Styles>
         }
     }
 
-    handleFavorite = async (file) => {
-        await API.post('/add-favorite',{file},{withCredentials: true}) .then(response => {return response.data})
-    }
-
-    renderFavorisStar(file){
-        return (file.isFavoris === true) ? < StarRoundedIcon onClick={e => {this.handleFavorite(file)}}/> :  < StarBorderRoundedIcon  onClick={e => {this.handleFavorite(file)}}/>
-    }
-
     render() {
         const { files } = this.state;
         const { classes } = this.props;
@@ -128,13 +118,6 @@ export default class FileList extends React.PureComponent<P & WithStyles<Styles>
             <Grid>
                 <TableContainer component={Paper}>
                 <Table aria-label="customized table">
-                    {/* <TableHead>
-                        <TableRow>
-                            <StyledTableCell></StyledTableCell>
-                            <StyledTableCell>Nom du fichier</StyledTableCell>
-                            <StyledTableCell></StyledTableCell>
-                        </TableRow>
-                    </TableHead> */}
                     <TableBody>
                     {files.map((file) => (
                         <StyledTableRow key={file.title}>
@@ -144,10 +127,10 @@ export default class FileList extends React.PureComponent<P & WithStyles<Styles>
                                     <span><FolderOpenTwoToneIcon fontSize="large" color="primary"/></span>
                                 }
                                 {file.title}
-                                {this.renderFavorisStar(file)}
+                                <StarRoundedIcon />
                             </StyledTableCell>
                         <StyledTableCell align="right">{file.size} ko</StyledTableCell>
-                        </StyledTableRow>
+                        </StyledTableRow>       
                     ))}
                     </TableBody>
                 </Table>

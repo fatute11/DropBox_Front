@@ -2,12 +2,14 @@ import React from 'react'
 import Dropzone from 'react-dropzone'
 import API from '../../Api/Api'
 import AuthService from '../../services/auth.service'
+import { withStyles, WithStyles, } from '@material-ui/core';
+import styles, { Styles } from './styles';
 
-// interface P {}
-// interface S {}
-{/* <P & WithStyles<Styles> > */}
-export default class UploadFolder extends React.PureComponent{
-    //public static Display = withStyles(styles as any)(UploadFolder) as React.ComponentType<P>
+interface P {}
+interface S {}
+
+export default class UploadFolder extends React.PureComponent<P & WithStyles<Styles> >{
+    public static Display = withStyles(styles as any)(UploadFolder) as React.ComponentType<P>
 
     handleDrop = async (acceptedFiles) => {
 
@@ -27,12 +29,13 @@ export default class UploadFolder extends React.PureComponent{
     }
 
     render(){
+        const { classes } = this.props;
         return(
-            <div>
+            <div className={classes.uploadContainer}>
                 <Dropzone onDrop={(acceptedFiles: any) => this.handleDrop(acceptedFiles)}>
                     {({getRootProps, getInputProps}: any) => (
                         <section>
-                        <div {...getRootProps()}>
+                        <div {...getRootProps()} className={classes.dragNdropArea}>
                             <input {...getInputProps()} />
                             <p>Drag 'n' drop some files here, or click to select files</p>
                         </div>

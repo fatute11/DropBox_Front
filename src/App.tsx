@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, HashRouter, Route, Switch } from "react-router-dom";
 import ForgotPassword from "./Layouts/ForgotPassword"
 import ResetPassword from "./Layouts/ResetPassword"
-import FileList from "./Layouts/UserFiles/index"
+import UserFiles from "./Layouts/UserFiles/index"
 import UploadFiles from "./Components/UploadFolder"
 
 import HeaderBar from "./Components/HeaderBar"
@@ -20,7 +20,7 @@ function App() {
     return (
         <div>
             <Router>
-                <HeaderBar />
+                {/* <HeaderBar /> */}
                 <Switch>
                     <Route exact path='[/, /home]' component={Home} isAuthed={true}/>
                     <Route exact path='/login' component={Login} isAuthed={true}/>
@@ -31,8 +31,8 @@ function App() {
                     <Route path='/admin' component={BoardAdmin} isAuthed={true} /> */}
                     <Route exact path="/forgot-password/" component={ForgotPassword}></Route>
                     <Route exact path="/reset-password/:token/" component={ResetPassword}></Route>
-                    <Route exact path="/file-list" component={FileList}></Route>
-                    <Route exact path="/upload-file" component={UploadFiles}></Route>
+                    <Route exact path="/file-list" component={UserFiles.Display}></Route>
+                    {/* <Route exact path="/upload-file" component={UploadFiles.Display}></Route> */}
                 </Switch>
             </Router>
         </div>
